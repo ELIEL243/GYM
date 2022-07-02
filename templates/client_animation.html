@@ -1,0 +1,75 @@
+<div class="modal fade" id="DeleteModal" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalToggleLabel">Suppression</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Voulez vous supprimer le client ?
+        </div>
+        <div class="modal-footer">
+            <form method="post">
+                {% csrf_token %}
+                <input type="hidden" value="{{ client1.id }}" name="id_eq">
+                <input type="submit" class="btn btn-danger" name="delete" value="oui">
+            </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+    <div class="modal fade" id="AddEquipement" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalToggleLabel">Nouvel client</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form class="form-control" method="post">
+              {% csrf_token %}
+              <input type="text" class="form-control" placeholder="nom du client" name="nom">
+              <input type="text" class="form-control" name="phone" placeholder="telephone" />
+              <input type="text" class="form-control" name="adresse" placeholder="adresse" >
+
+              <input type="submit" class="form-control btn btn-primary" value="valider" name="save" style="margin: auto" >
+
+          </form>
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+     <div class="modal fade" id="Update" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalToggleLabel">Modifier le client</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form class="form-control" method="post">
+              {% csrf_token %}
+              <input type="text" class="form-control" value="{{ client_update.name }}" placeholder="nom du client" name="nom">
+              <input type="text" class="form-control" name="phone" value="{{ client_update.phone }}" placeholder="telephone" />
+              <input type="text" class="form-control" name="adresse" value="{{ client_update.address }}" placeholder="adresse" >
+              <input type="hidden" name="id_eq" value="{{ client_update.id }}" >
+
+              <input type="submit" class="form-control btn btn-primary" value="valider" name="save_update" style="margin: auto" >
+
+          </form>
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+    </div>
+  </div>

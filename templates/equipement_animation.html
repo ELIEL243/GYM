@@ -1,0 +1,69 @@
+<div class="modal fade" id="DeleteModal" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalToggleLabel">Suppression</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Voulez vous supprimer l'equipement ?
+        </div>
+        <div class="modal-footer">
+            <form method="post">
+                {% csrf_token %}
+                <input type="hidden" value="{{ equipement1.id }}" name="id_eq">
+                <input type="submit" class="btn btn-danger" name="delete" value="oui">
+            </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+    <div class="modal fade" id="AddEquipement" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalToggleLabel">Nouvel equipement</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form class="form-control" method="post">
+              {% csrf_token %}
+              <input type="text" class="form-control" placeholder="nom de l'equipement" name="nom">
+              <input type="text" class="form-control" name="desc" placeholder="description sur l'equipement" />
+              <input type="number" class="form-control" name="qts" placeholder="la quantité" >
+
+              <input type="submit" class="form-control btn btn-primary" value="valider" name="save" style="margin: auto" >
+
+          </form>
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <div class="modal fade" id="Update" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalToggleLabel">Ajout en stock</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form method="post">
+              {% csrf_token %}
+              <input class="form-control" type="number" min="0" name="qts" placeholder="veuillez entrer la quantité">
+              <input type="submit" name="save_update" value="valider" class="btn btn-primary" style="margin: auto">
+              <input type="hidden" name="id_eq" value="{{ equipement_update.id }}">
+
+          </form>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+

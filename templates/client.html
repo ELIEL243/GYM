@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+    <script src="{% static 'js/jquery-3.6.0.min.js' %}">
+    </script>
+
+    {% include 'message.html' %}
+    {% include 'client_animation.html' %}
+    {% if client1 %}
+
+    <script>
+
+        $(document).ready(function() {
+            $("#DeleteModal").modal('show');
+        });
+    </script>
+
+
+    {% endif %}
+
+    {% if client_update %}
+        <script>
+
+        $(document).ready(function() {
+            $("#Update").modal('show');
+        });
+    </script>
+
+    {% endif %}
+
+    <a class="btn btn-primary" data-bs-toggle="modal" href="#AddEquipement" role="button">nouveau client</a>
+    <h1 class="text-center"></h1>
+    <div class="row table-responsive" >
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Telephone</th>
+                    <th>Adresse</th>
+                    <th>Action</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                {% for client in clients %}
+                    <tr>
+                        <td>{{ client.name }}</td>
+                        <td>{{ client.phone }}</td>
+                        <td>{{ client.address }}</td>
+                        <form method="get">
+                            {% csrf_token %}
+                            <td><input type="submit" value="supprimer" name="del" class="btn btn-danger"></td>
+                            <td><input type="submit" value="modifier" name="edit" class="btn btn-success"></td>
+                            <input type="hidden" value="{{ client.id }}" name="id_eq">
+                        </form>
+
+
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

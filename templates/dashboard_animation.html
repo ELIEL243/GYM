@@ -1,0 +1,51 @@
+{% load crispy_forms_tags %}
+{% load crispy_forms_filters %}
+<div class="modal fade" id="AddAbonnement" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalToggleLabel">Nouvel Abonnement</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form class="form-control" method="post">
+              {% csrf_token %}
+                {{ form.client | as_crispy_field }}
+                {{ form.offer | as_crispy_field }}
+              <input type="submit" class="form-control btn btn-primary" value="valider" name="save" style="margin: auto" >
+
+          </form>
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+    <div class="modal fade" id="ReAbonnement" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalToggleLabel">Reabonnement</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form class="form-control" method="post">
+              {% csrf_token %}
+                Offre:
+                <select name="offre" class="form-control" required>
+                    {% for offre in offres %}
+                        <option>{{ offre.type }}</option>
+                    {% endfor %}
+                </select>
+                <input type="hidden" name="id_ab" value="{{ abonnement.id }}">
+                <input type="submit" class="form-control btn btn-primary" value="valider" name="save_ab" style="margin: auto" >
+
+          </form>
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+    </div>
+  </div>

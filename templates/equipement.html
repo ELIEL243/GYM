@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    {% include 'message.html' %}
+
+
+
+    <script src="{% static 'js/jquery-3.6.0.min.js' %}">
+    </script>
+
+    {% include 'equipement_animation.html' %}
+
+
+
+    {% if equipement1 %}
+
+    <script>
+
+        $(document).ready(function() {
+            $("#DeleteModal").modal('show');
+        });
+    </script>
+
+
+    {% endif %}
+
+
+    {% if equipement_update %}
+        <script>
+
+        $(document).ready(function() {
+            $("#Update").modal('show');
+        });
+    </script>
+
+    {% endif %}
+
+  <a class="btn btn-primary" data-bs-toggle="modal" href="#AddEquipement" role="button">nouvel equipement</a>
+    <div class="row table-responsive" >
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Description</th>
+                    <th>Quantité</th>
+                    <th>Action</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                {% for equipement in equipements %}
+                    <tr>
+                        <td>{{ equipement.name }}</td>
+                        <td>{{ equipement.description }}</td>
+                        <td>{{ equipement.quantity }}</td>
+                        <form method="get">
+                            {% csrf_token %}
+                            <td><input type="submit" value="supprimer" name="del" class="btn btn-danger"></td>
+                            <input type="hidden" value="{{ equipement.id }}" name="id_eq">
+                            <td><input type="submit" value="ajouter en stock" name="add_stock" class="btn btn-success"></td>
+
+                        </form>
+
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

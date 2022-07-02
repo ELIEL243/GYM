@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% block title %}<title>home</title>{% endblock %}
+{% block content %}
+
+    {% load static %}
+
+
+    <script src="{% static 'js/jquery-3.6.0.min.js' %}">
+    </script>
+    {% include 'dashboard_animation.html' %}
+    {% include 'message.html' %}
+    {% if abonnement %}
+        <script>
+            $(document).ready(function () {
+               $('#ReAbonnement').modal('show')
+            });
+        </script>
+    {% endif %}
+    <a class="btn btn-primary" href="#AddAbonnement" data-bs-toggle="modal" role="button">nouvel abonnement</a>
+
+    <div class="row mt-3 justify-content-center">
+        <div class="col-4">
+            <div class="card alert alert-warning">
+                <div class="card-header text-center">
+                    <h3>Nombre d'equipement</h3>
+                </div>
+
+                <div class="card-body alert-warning text-center">
+                    <h1>{{ nbr_equipement }}</h1>
+                </div>
+                <div class="card-footer">
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-4">
+            <div class="card alert alert-success">
+                <div class="card-header text-center">
+                    <h3>Nombre de client</h3>
+                </div>
+
+                <div class="card-body alert-success text-center">
+                    <h1>{{ nbr_client }}</h1>
+                </div>
+                <div class="card-footer">
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-4">
+            <div class="card alert alert-primary">
+                <div class="card-header text-center">
+                    <h3>Nombre des coachs</h3>
+                </div>
+
+                <div class="card-body alert-primary text-center">
+                    <h1>{{ nbr_coach }}</h1>
+                </div>
+                <div class="card-footer">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <h3 class="text-center">Abonnements</h3>
+    </div>
+    <div class="row table-responsive mt-3" >
+        <table class="table table-bordered text-center">
+            <thead>
+                <tr>
+                    <th>Client</th>
+                    <th>Offre</th>
+                    <th>Fin de l'abonnement</th>
+                    <th>Statut</th>
+                    <th>Action</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                {% for abonnement in abonnements %}
+                    <tr>
+                        <td>{{ abonnement.client.name }}</td>
+                        <td>{{ abonnement.offer.type }}</td>
+                        <td>{{ abonnement.echeance_date }}</td>
+                        {% if abonnement.status == False %}<td class="bg-success text-light">actif</td>{% else %}<td class="bg-danger text-light">inactif</td>{% endif %}
+                        <form method="get">
+                            {% csrf_token %}
+                            <td><input type="submit" value="réabonner" name="reab" class="btn btn-success"></td>
+                            <input type="hidden" name="id_ab" value="{{ abonnement.id }}">
+                        </form>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
